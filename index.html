@@ -1160,7 +1160,7 @@
             const objective = document.getElementById('objective').value.trim();
 
             // Mensaje que llegará a WhatsApp
-            const message = `Hola Ivo! Mi nombre es *${name}*.\n\n📱 Mi WhatsApp es: ${phone}\n💪 El plan que me interesa es: *${plan}*\n🎯 Mi objetivo principal es: *${objective}*\n\nMe gustaría recibir información sobre los planes de asesoría personal.`;
+            const message = `Hola Ivo! Mi nombre es *${name}*.\n\n Mi WhatsApp es: ${phone}\n El plan que me interesa es: *${plan}*\n Mi objetivo principal es: *${objective}*\n\nMe gustaría seguir con el siguiente paso.`;
 
             // Enlace codificado
             const whatsappUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(message)}`;
