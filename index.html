@@ -712,7 +712,7 @@
             font-weight: bold;
         }
 
-        .form-group input, .form-group textarea {
+        .form-group input, .form-group textarea, .form-group select {
             width: 100%;
             padding: 16px;
             background: var(--bg-color);
@@ -724,7 +724,12 @@
             transition: border-color 0.3s;
         }
 
-        .form-group input:focus, .form-group textarea:focus {
+        .form-group select option {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+        }
+
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
             border-color: var(--primary-neon);
         }
 
@@ -1049,7 +1054,6 @@
                 </div>
             </div>
             
-            </div>
         </div>
     </section>
 
@@ -1098,6 +1102,18 @@
                 <input type="tel" id="phone" placeholder="Ej: +54 9 11 1234 5678" required>
             </div>
 
+            <!-- CUADRO AGREGADO: SELECCIÓN DE PLAN -->
+            <div class="form-group">
+                <label for="plan">El plan que me interesa es</label>
+                <select id="plan" required>
+                    <option value="" disabled selected>Selecciona una opción</option>
+                    <option value="Plan Online ($20.000/mes)">Plan Online ($20.000/mes)</option>
+                    <option value="Plan Presencial ($25.000/mes)">Plan Presencial ($25.000/mes)</option>
+                    <option value="Plan Trimestral ($80.000 / 33 clases)">Plan Trimestral ($80.000 / 33 clases)</option>
+                    <option value="Plan Full ($100.000 / 3 meses)">Plan Full ($100.000 / 3 meses)</option>
+                </select>
+            </div>
+
             <div class="form-group">
                 <label for="objective">Tu Objetivo Principal</label>
                 
@@ -1140,10 +1156,11 @@
             
             const name = document.getElementById('name').value.trim();
             const phone = document.getElementById('phone').value.trim();
+            const plan = document.getElementById('plan').value;
             const objective = document.getElementById('objective').value.trim();
 
             // Mensaje que llegará a WhatsApp
-            const message = `Hola Ivo!  Mi nombre es *${name}*.\n\n Mi WhatsApp es: ${phone}\n Mi objetivo principal es: *${objective}*\n\nMe gustaría recibir información sobre los planes de asesoría personal.`;
+            const message = `Hola Ivo! Mi nombre es *${name}*.\n\n📱 Mi WhatsApp es: ${phone}\n💪 El plan que me interesa es: *${plan}*\n🎯 Mi objetivo principal es: *${objective}*\n\nMe gustaría recibir información sobre los planes de asesoría personal.`;
 
             // Enlace codificado
             const whatsappUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(message)}`;
@@ -1184,11 +1201,13 @@
                 item.classList.add('active');
 
                 const newImgSrc = item.getAttribute('data-img');
-                stepImage.style.opacity = 0;
-                setTimeout(() => {
-                    stepImage.src = newImgSrc;
-                    stepImage.style.opacity = 1;
-                }, 200);
+                if(stepImage) {
+                    stepImage.style.opacity = 0;
+                    setTimeout(() => {
+                        stepImage.src = newImgSrc;
+                        stepImage.style.opacity = 1;
+                    }, 200);
+                }
             });
         });
 
